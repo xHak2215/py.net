@@ -104,8 +104,8 @@ def inter_info():
 
 preview_text = Figlet(font='standard')
 print("\033[32m{}".format(preview_text.renderText('py.net')))
-print(version)
-print(f"[01]pyip \n[02]scan_local_net\n[03]ban_ip\n[04]mu_ip\n[05]exit")
+print(f"V{version}")
+print(f"[01]pyip \n[02]scan_local_net\n[03]ban_ip\n[04]mu_ip\n[05]exit\ninter_info()")
 menu = input(f'pyNet{kast}')
 if menu =="1":
     ippy()
