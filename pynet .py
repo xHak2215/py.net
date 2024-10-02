@@ -10,6 +10,7 @@ import scapy.all as sc
 from scapy.all import ARP, Ether, srp
 import subprocess
 import psutil
+import time
 
 #pip install requests
 #pip install --pre scapy[basic]
@@ -99,13 +100,21 @@ def inter_info():
     network_traffic = psutil.net_io_counters()
     print("Информация о сетевом трафике:")
     print(network_traffic)
+    
+def ping(ping_url):
+    start_time = time.time()
+    k=requests.get(ping_url)
+    k.status_code
+    response=time.time() - start_time
+    print('ping',response)
+    return response
 
     
 
 preview_text = Figlet(font='standard')
 print("\033[32m{}".format(preview_text.renderText('py.net')))
 print(f"V{version}")
-print(f"[01]pyip \n[02]scan_local_net\n[03]ban_ip\n[04]mu_ip\n[05]exit\ninter_info()")
+print(f"[01]pyip \n[02]scan_local_net\n[03]ban_ip\n[04]mu_ip\n[05]exit\ninter_info()\nping")
 menu = input(f'pyNet{kast}')
 if menu =="1":
     ippy()
@@ -119,9 +128,23 @@ elif menu =="5":
     exit()
 elif menu =="6":
     inter_info()
+elif menu =="7":
+    ping_url=input("url{kast}")
+    if ping_url =="":
+        print(ping('https://yandex.ru'))
+    elif ping_url==" ":
+        print(ping('https://yandex.ru'))
+    else:
+        print(ping(ping_url))
+        
+        
 
 else:
-    print('error')
+    print('error 1: комманда не найдена ')
+
+
+
+
 
 
 
