@@ -1,0 +1,5 @@
+requests ==2.32.3
+sockets ==1.0.0
+subprocess.run ==0.0.8
+scapy ==2.6.0rc1
+pyfiglet ==1.0.2
