@@ -11,6 +11,7 @@ import os
 #pip install requests
 #pip install --pre scapy[basic]
 kast =' >>'
+version = '1.2.0'
 
 def ippy():
     base_url = "https://demo.ip-api.com/json/"
