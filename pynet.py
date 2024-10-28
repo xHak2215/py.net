@@ -7,6 +7,7 @@ import scapy.all as sc
 from scapy.all import ARP, Ether, srp
 import socket
 import os
+import time
 
 #pip install requests
 #pip install --pre scapy[basic]
@@ -95,31 +96,45 @@ def mu_ip():
     mu_ip = r.json()['ip']
     print(f"ваш ip{kast} {mu_ip}")
     return mu_ip
+
+def ping(ping_url)->int:
+    start_time = time.time()
+    try:
+        k=requests.get(ping_url)
+        s=k.status_code
+        if s== 200:
+            pass
+        else:
+            return "not"
+    except requests.exceptions.InvalidURL:
+        return f"Invalid url {kast}{ping_url}"
+    response=time.time() - start_time
+#    print('ping',response)
+    return response
     
     
-def menu_pynet():
+def menu():
     preview_text = Figlet(font='standard')
     print("\033[32m{}".format(preview_text.renderText('py.net')))
-    print(f"[01]pyip \n[02]scan_local_net\n[03]ban_ip\n[04]ulr_to_ip")
+    print(f"[01]pyip\n[02]scan_local_net\n[03]ban_ip\n[04]ulr_to_ip\n[05] ping \n")
     while True: 
         menu = input(f'pyNet{kast}')
-        if menu =="1":
+        if menu =="1" or menu =="01":
             ippy()
-        elif menu=="2":
+        elif menu=="2" or menu=="02":
             scan_local_net()
-        elif menu == "3":
+        elif menu == "3" or menu == "03":
             ban_ip()
-        elif menu =="4":
+        elif menu =="4" or menu =="04":
             ulrtoip = input(f"ulr{kast}")
             ip = ulr_to_ip(ulrtoip)
             print(f"The IP address of {ulrtoip} is {ip}")
-        elif menu =="5":
-            mu_ip()
+        elif menu =="5"or menu =="05":
+            print(ping(input(f'ip or domen {kast}')))
+            
 
         else:
             print('error')
-menu_pynet()
-if __name__ =='__mein__':
-#    os.system("cls")
-    menu_pynet() 
+menu()
+
 
