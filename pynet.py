@@ -111,6 +111,8 @@ def ping(ping_url)->int:
     response=time.time() - start_time
 #    print('ping',response)
     return response
+
+
     
     
 def menu():
@@ -130,8 +132,9 @@ def menu():
             ip = ulr_to_ip(ulrtoip)
             print(f"The IP address of {ulrtoip} is {ip}")
         elif menu =="5"or menu =="05":
-            print(ping(input(f'ip or domen {kast}')))
-            
+            print(ping(input(f'ping in domen {kast}')))
+#        elif menu =="6"or menu=="06":
+
 
         else:
             print('error')
