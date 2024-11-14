@@ -8,13 +8,6 @@
 
   <h3 align="center">py.net</h3>
 
-  <p align="center">
-    <br />
-    <a href="https://github.com/xHak2215/consol"><strong>.</strong></a>
-    <br />
-  </p>
-</div>
-
 
 
 <details>
